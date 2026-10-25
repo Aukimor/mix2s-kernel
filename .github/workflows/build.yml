@@ -1,1 +1,24 @@
-bmFtZTogQnVpbGQgUG9sYXJpcyBLZXJuZWwKCm9uOgogIHdvcmtmbG93X2Rpc3BhdGNoOgoKam9iczoKICBidWlsZDoKICAgIHJ1bnMtb246IHVidW50dS1sYXRlc3QKICAgIHBlcm1pc3Npb25zOgogICAgICBjb250ZW50czogcmVhZAogICAgc3RlcHM6CiAgICAgIC0gbmFtZTogQnVpbGQgS2VybmVsCiAgICAgICAgdXNlczogZGFiYW8xOTU1L2tlcm5lbF9idWlsZF9hY3Rpb25AbWFpbgogICAgICAgIHdpdGg6CiAgICAgICAgICBrZXJuZWwtdXJsOiBodHRwczovL2dpdGh1Yi5jb20vQXVraW1vci9wb2xhcmlzCiAgICAgICAgICBrZXJuZWwtYnJhbmNoOiBwb2xhcmlzLW8tb3NzCiAgICAgICAgICBrZXJuZWwtZGlyOiBrZXJuZWwKICAgICAgICAgIGNvbmZpZzogcG9sYXJpc19jdXN0b21fZGVmY29uZmlnCiAgICAgICAgICBhcmNoOiBhcm02NAogICAgICAgICAgYW9zcC1nY2M6IHRydWUKICAgICAgICAgIGFuZHJvaWQtdmVyc2lvbjogOQogICAgICAgICAgZGlzYWJsZS1sdG86IHRydWUKICAgICAgICAgIGFueWtlcm5lbDM6IHRydWUK
+name: Build Polaris Kernel
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Build Kernel
+        uses: dabao1955/kernel_build_action@main
+        with:
+          kernel-url: https://github.com/Aukimor/polaris
+          kernel-branch: polaris-o-oss
+          kernel-dir: kernel
+          config: polaris_user_defconfig
+          arch: arm64
+          aosp-gcc: true
+          android-version: 9
+          disable-lto: true
+          merge-configs: '["https://raw.githubusercontent.com/Aukimor/mix2s-kernel/main/kernel.config"]'
+          anykernel3: true
