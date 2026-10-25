@@ -24,3 +24,6 @@ jobs:
           disable-lto: true
           extra-make-args: '["HOSTCFLAGS=-fcommon -O2"]'
           anykernel3: true
+          anykernel3-url: https://github.com/Aukimor/mix2s-kernel
+          release: true
+          access-token: ${{ secrets.GITHUB_TOKEN }}
